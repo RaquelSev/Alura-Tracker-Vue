@@ -13,30 +13,58 @@
         />
       </div>
       <div class="column">
-        <section>
-          <strong> 00:00:00 </strong>
-        </section>
-        <button class="button">
-          <span class="icon">
-            <i class="fas fa-play"></i>
-          </span>
-          <span>play</span>
-        </button>
-        <button class="button">
-          <span class="icon">
-            <i class="fas fa-stop"></i>
-          </span>
-          <span>stop</span>
-        </button>
+        <div
+          class="is-flex is-align-items-center is-justify-content-space-between"
+        >
+          <section>
+            <strong> {{ tempoDecorrido }} </strong>
+          </section>
+          <button class="button" @click="iniciar()">
+            <span class="icon">
+              <i class="fas fa-play"></i>
+            </span>
+            <span>play</span>
+          </button>
+          <button class="button" @click="finalizar()">
+            <span class="icon">
+              <i class="fas fa-stop"></i>
+            </span>
+            <span>stop</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, DefineComponent } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "FormularioTarefa",
+  data() {
+    return {
+      tempoEmSegundos: 0,
+      cronometro: 0,
+    };
+  },
+  computed: {
+    tempoDecorrido(): string {
+      return new Date(this.tempoEmSegundos * 1000)
+        .toISOString()
+        .substring(19, 11);
+    },
+  },
+  methods: {
+    iniciar() {
+      this.cronometro = setInterval(() => {
+        this.tempoEmSegundos += 1;
+      }, 1000);
+      console.log("Iniciando");
+    },
+    finalizar() {
+      clearInterval(this.cronometro);
+    },
+  },
 });
 </script>
 <style scoped></style>
