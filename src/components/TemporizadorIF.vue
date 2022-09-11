@@ -1,29 +1,33 @@
 <template>
-  <div class="is-flex is-align-items-center is-justify-content-space-between">
+  <section
+    class="is-flex is-align-items-center is-justify-content-space-between"
+  >
     <CronometroTempo :tempoEmSegundos="tempoEmSegundos" />
-    <button class="button" @click="iniciar()" :disabled="cronometroRodando">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button>
-    <button class="button" @click="finalizar()" :disabled="!cronometroRodando">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button>
-  </div>
+    <BotaoPlayStop
+      @clicado="iniciar"
+      icone="fas- fa-play"
+      texto="play"
+      :desabilitado="cronometroRodando"
+    />
+    <BotaoPlayStop
+      @clicado="finalizar"
+      icone="fas- fa-stop"
+      texto="stop"
+      :desabilitado="!cronometroRodando"
+    />
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import CronometroTempo from "./CronometroTempo.vue";
+import BotaoPlayStop from "./BotaoPlayStop.vue";
 export default defineComponent({
   name: "TemporizadoIF",
   emits: ["aoTemporizadorIFFinalizado"],
   components: {
     CronometroTempo,
+    BotaoPlayStop,
   },
   data() {
     return {
