@@ -5,13 +5,13 @@
     <CronometroTempo :tempoEmSegundos="tempoEmSegundos" />
     <BotaoPlayStop
       @clicado="iniciar"
-      icone="fas- fa-play"
+      icone="fas fa-play"
       texto="play"
       :desabilitado="cronometroRodando"
     />
     <BotaoPlayStop
       @clicado="finalizar"
-      icone="fas- fa-stop"
+      icone="fas fa-stop"
       texto="stop"
       :desabilitado="!cronometroRodando"
     />
